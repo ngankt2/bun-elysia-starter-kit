@@ -1,5 +1,7 @@
 import lib, {i18n, InitOptions} from "i18next";
 import {Elysia} from "elysia";
+import path from "path";
+import {Glob} from "bun";
 
 export type I18NextPluginOptions = {
     initOptions: InitOptions;
@@ -10,8 +12,6 @@ function _getLanguage(context: any, keys: any = ['language', 'lang']) {
     let {request, body, set, params, store} = context;
     const url = new URL(request.url);
     for (const key of keys) {
-        console.log(__filename, key);
-
         if (url.searchParams.get(key)) {
             return url.searchParams.get(key);
         }
@@ -37,10 +37,11 @@ function _getLanguage(context: any, keys: any = ['language', 'lang']) {
 
 const loadLocales = () => {
     const locales: any = {};
-    const languages = ["en", "vi"];
-    languages.forEach((lang: string) => {
-        locales[lang] = {translation: require(`locales/${lang}.json`)};
-    });
+    const glob = new Glob("*");
+    for (const file of glob.scanSync({cwd: './locales', absolute: true})) {
+        const fileNameWithoutExt = path.basename(file, path.extname(file));
+        locales[fileNameWithoutExt] = {translation: require(file)};
+    }
     return locales;
 };
 
