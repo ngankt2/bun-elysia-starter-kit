@@ -5,7 +5,7 @@
     "test": "NODE_ENV=test bun test ./test/**.test.ts",
     "dev": "NODE_ENV=dev bun --env-file=.env run --watch app/index.ts",
     "cluster": "NODE_ENV=cluster bun --env-file=.env run app/cluster.ts",
-    "cron": "NODE_ENV=cron bun --env-file=.env run app/crond.ts",
+    "cronjob": "NODE_ENV=cron bun --env-file=.env run app/crond.ts",
     "db": "database generate --schema database/mysql-client.prisma"
   },
   "dependencies": {
