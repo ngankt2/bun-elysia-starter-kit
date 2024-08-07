@@ -5,6 +5,7 @@ import apiDocument from "../http/middleware/apiDocument";
 import {staticPlugin} from "@elysiajs/static";
 import errorHandler from "../http/middleware/errorHandler";
 import i18nextHandler from "../http/middleware/i18nHandler";
+import api_route from "../http/routes/api_route";
 
 const datetime = new Date();
 const app = new Elysia()
@@ -24,6 +25,7 @@ app
             status: 200,
         }
     })
+    .use(api_route)
     .listen(process.env.APP_PORT || 4000, async () => {
         console.log(
             `Starter app is running at ${app.server?.hostname}:${app.server?.port}, ${datetime}`

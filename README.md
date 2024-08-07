@@ -42,3 +42,14 @@ bun run cluster
 ```sh
 bun run cronjob 
 ```
+
+## Api base url
+
+```sh
+http://localhost:3000/
+```
+## Demo
+
+http://localhost:3000/api/news/
+http://localhost:3000/api/detail
+

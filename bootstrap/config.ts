@@ -1,4 +1,4 @@
-// @ts-ignore
+
 import data from "../package.json";
 
 export default {
